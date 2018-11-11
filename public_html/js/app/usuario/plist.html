@@ -5,9 +5,9 @@
             <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Usuarios</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                     <button type="button" class="btn btn-light" ng-click="resetOrder()">
-                                <i class="fa fa-eye"></i>
-                            </button>
+                    <button type="button" class="btn btn-light" ng-click="resetOrder()">
+                        <i class="fa fa-eye"></i>
+                    </button>
                     <div class="btn-group" style="width:400px;">
                         <p class="mt-2" style="width:200px;">Selecciona RPP: </p>
                         <select class="form-control" 
@@ -43,19 +43,19 @@
                     <nav aria-label="paginacion">
                         <ul class="pagination">
                             <li class="page-item">
-                                <a class="page-link" ng-show="page > 2" href="usuario/plist/{{rpp}}/1/{{order}}/{{align}}">First</a>
+                                <a class="page-link" ng-show="page > 2" href="usuario/plist/{{rpp}}/1/{{orderURLCliente}}">First</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" ng-show="page > 1" href="usuario/plist/{{rpp}}/{{page - 1}}/{{order}}/{{align}}">Previous</a>
+                                <a class="page-link" ng-show="page > 1" href="usuario/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}">Previous</a>
                             </li>
                             <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
-                                <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}/{{order}}/{{align}}">{{p}}</a>
+                                <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" ng-show="page != totalPages" href="usuario/plist/{{rpp}}/{{page--1}}/{{order}}/{{align}}">Next</a>
+                                <a class="page-link" ng-show="page != totalPages" href="usuario/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}">Next</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" ng-show="page != totalPages-1 && page != totalPages" href="usuario/plist/{{rpp}}/{{totalPages}}/{{order}}/{{align}}">Last</a>
+                                <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="usuario/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">Last</a>
                             </li>
                         </ul>
                     </nav>
@@ -141,7 +141,7 @@
                         <td>{{fila.ape1}}</td>
                         <td>{{fila.ape2}}</td>
                         <td>{{fila.login}}</td>
-                        <td>{{fila.id_tipoUsuario}}</td>
+                        <td>{{fila.tipoUsuario.desc}}</td>
                     </tr>
                 </table>
 

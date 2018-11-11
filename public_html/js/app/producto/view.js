@@ -1,29 +1,19 @@
 'use strict'
 
-moduleProducto.controller('productoViewController', ['$scope', '$http', 'toolService', '$routeParams',
-    function ($scope, $http, toolService, $routeParams) {
-        $scope.id = $routeParams.id;
-        $scope.mostrar = false;
-        $scope.activar = true;
-        $scope.ajaxData = "";
-        $scope.toggle = function () {
-            $scope.mostrar = !$scope.mostrar;
-        }
-        $scope.enable = function () {
-            $scope.activar = !$scope.activar;
-        }
+moduleProducto.controller('productoViewController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
+        $scope.id = $routeParams.id;        
         $http({
-            method: 'GET',
-            //withCredentials: true,
+            method: 'GET',            
             url: 'http://localhost:8081/trolleyes/json?ob=producto&op=get&id=' + $scope.id
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxData = response.data.message;
+            $scope.ajaxDatoProducto = response.data.message;
         }, function (response) {
-            $scope.ajaxData = response.data.message || 'Request failed';
+            $scope.ajaxDatoProducto = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
+
         $scope.isActive = toolService.isActive;
 
-    }
-]);
+    }]);

@@ -1,28 +1,30 @@
 <header ng-include="'js/app/header.html'"></header>
 <main role="main" class="container">
 
-    <div class="mx-auto" style="margin-top: 80px">
-        <table class="table table-hover table-dark">
-            <tr>
-                <th class="text-center">Id</th>
-                <th class="text-center">Codigo</th>
-                <th class="text-center">Descripción</th>
-                <th class="text-center">Existencias</th>
-                <th class="text-center">Precio</th>
-                <th class="text-center">Tipo Producto</th>
-            </tr>
-            <tr>
-                <td class="text-center">{{ajaxData.id}}</td>
-                <td class="text-center">{{ajaxData.codigo}}</td>
-                <td class="text-center">{{ajaxData.desc}}</td>
-                <td class="text-center">{{ajaxData.existencias}}</td>
-                <td class="text-center">{{ajaxData.precio}}</td>
-                <td class="text-center">{{ajaxData.id_tipoProducto}}</td>
-            </tr>
-        </table>
+    <!--    <h3>Resultado de la llamada AJAX: {{ajaxData}}</h3>-->
+    <div class="primeraParte"></div>
+    <table class="table table-striped table-hover">        
+        <caption>Lista de Productos View</caption>
+        <tr class="alineacion">
+            <th>ID</th>
+            <th>CÓDIGO</th>
+            <th>DESCRIPCIÓN</th>
+            <th>EXISTENCIAS</th>
+            <th>PRECIO</th>
+            <th>FOTO</th>
+            <th>ID_TIPOPRODUCTO</th>            
+        </tr>
+        <tr class="alineacion">
+            <th>{{ajaxDatoProducto.id}}</th>
+            <td>{{ajaxDatoProducto.codigo}}</td>
+            <td>{{ajaxDatoProducto.desc}}</td>
+            <td>{{ajaxDatoProducto.existencias}}</td>
+            <td>{{ajaxDatoProducto.precio}}</td>
+            <td>{{ajaxDatoProducto.foto}}</td>
+            <td>{{ajaxDatoProducto.id_tipoProducto}}</td>                                                               
+        </tr>
+    </table>
 
-    </div>
-
+    <a href="producto/plist/"> <button class="btn btn-success">Volver</button> </a>
 </main>
-
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

@@ -4,10 +4,6 @@ moduleTipousuario.controller('tipousuarioEditController', ['$scope', '$http', '$
     function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ruta = $location.path();
-        $scope.var1 = "Hola mundo";
-        $scope.var2 = "Hola qué tal";
-        $scope.mostrar = false;
-        $scope.activar = true;
         $scope.ajaxData = "";
         $scope.toggle = function () {
             $scope.mostrar = !$scope.mostrar;
