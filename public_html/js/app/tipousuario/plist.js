@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '$location', 'toolService',
     function ($scope, $http, $location, toolService) {
