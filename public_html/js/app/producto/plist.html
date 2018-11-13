@@ -13,7 +13,7 @@
             <button ng-click="crearProductos()" type="button" class="btn btn-success">Enviar</button>
         </div> 
         <div class="col-2">
-            <button ng-click="limpiar()" type="reset"class="btn btn-danger">Limpiar</button>
+            <button ng-click="limpiar()" type="reset" class="btn btn-danger">Limpiar</button>
         </div>
     </div>             
     <h3 class="{{cssAlertSuccessUno}} mensaje">{{ajaxMensajeProducto1}} </h3>
@@ -129,7 +129,7 @@
                     <td>{{producto.precio}} €</td>
                     <td>{{producto.foto}}</td>
                     <td>{{producto.id_tipoProducto}}</td>                
-                    <td> <a  href="/trolleyes-client/public_html/producto/view/{{producto.id}}"><button style="font-size:15px" class="btn btn-danger"> <i class="fa fa-eye"></i></button></a></td>                                     
+                    <td> <a  href="/trolleyes-client/public_html/producto/view/{{producto.id}}"><button style="font-size:15px" class="btn btn-primary"> <i class="fa fa-eye"></i></button></a></td>                                     
                 </tr>
             </table> 
         </div>
