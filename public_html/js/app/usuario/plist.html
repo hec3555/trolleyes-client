@@ -11,39 +11,39 @@
                             ng-model="rpp" ng-options="value for value in select">
                     </select>
                 </div>
-            </div>
+            </div>     
         </main>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-10">
             <nav aria-label="paginacion">
                 <ul class="pagination">
                     <li class="page-item">
-                        <a class="page-link" ng-show="page > 1" href="usuario/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}">Previous</a>
+                        <a class="page-link" ng-show="page > 1" href="{{ob}}/plist/{{rpp}}/{{page - 1}}/{{orderURLCliente}}">Previous</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page > 2" href="usuario/plist/{{rpp}}/1/{{orderURLCliente}}">1</a>
+                        <a class="page-link" ng-show="page > 2" href="{{ob}}/plist/{{rpp}}/1/{{orderURLCliente}}">1</a>
                     </li>
                     <li class="page-item" ng-class="{'active':(p == page), 'disabled': p === '...'}" ng-repeat="p in list2 track by $index">
-                        <a class="page-link" href="usuario/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
+                        <a class="page-link" href="{{ob}}/plist/{{rpp}}/{{p}}/{{orderURLCliente}}">{{p}}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="usuario/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
+                        <a class="page-link" ng-show="page != totalPages - 1 && page != totalPages" href="{{ob}}/plist/{{rpp}}/{{totalPages}}/{{orderURLCliente}}">{{totalPages}}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" ng-show="page != totalPages" href="usuario/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}">Next</a>
+                        <a class="page-link" ng-show="page != totalPages" href="{{ob}}/plist/{{rpp}}/{{page--1}}/{{orderURLCliente}}">Next</a>
                     </li>                    
                 </ul>
             </nav>
         </div>
         <div class="col-2">
-            <a href="/trolleyes-client/public_html/usuario/new"><button type="button" class="btn btn-success btn-sm" style="width: auto; height:30px;">
-                    <i class="fa fa-plus-circle"> Crear usuario</i>
-                </button></a>
-        </div>
-        <div class="col-2">
+            <a  href="{{ob}}/create/"> 
+                <button type="button" class="btn btn-success btn-sm" style="width: 100px; height:30px;">
+                    <i class="fa fa-plus-circle"> Crear</i>
+                </button>
+            </a>
             <button type="button" class="btn btn-danger btn-sm" style="width: auto; height:30px;" ng-click="resetOrder()">
-                <i class="fa fa-broom"> Limpiar ordenación</i>
+                <i class="fa fa-broom"> Limpiar</i>
             </button>
         </div>
     </div>
@@ -51,7 +51,7 @@
 
     <div class="table-responsive">
         <table class="table table-striped table-sm">
-            <tr class="thead">
+            <tr class="thead-dark">
                 <th>
                     ID
                     <button type="button" class="btn btn-light btn-sm" ng-click="ordena('id', 'asc')">
@@ -73,7 +73,7 @@
                 <th>
                     Nombre
                     <button type="button" class="btn btn-light btn-sm" ng-click="ordena('nombre', 'asc')">
-                        <i class="fas fa-long-arrow-alt-up" ></i>
+                        <a class="fas fa-long-arrow-alt-up" ></a>
 
                     </button>
                     <button type="button" class="btn btn-light btn-sm" ng-click="ordena('nombre', 'desc')">
@@ -128,16 +128,16 @@
                 <td>{{fila.ape2}}</td>
                 <td>{{fila.login}}</td>                
                 <td>
-                    <a href="/trolleyes-client/public_html/tipousuario/view/{{fila.obj_tipoUsuario.id}}">{{fila.obj_tipoUsuario.desc}}</a>
+                    <a href="tipousuario/view/{{fila.obj_tipoUsuario.id}}">{{fila.obj_tipoUsuario.desc}}</a>
                 </td>
                 <td> 
-                    <a  href="/trolleyes-client/public_html/usuario/view/{{fila.id}}"> 
+                    <a  href="{{ob}}/view/{{fila.id}}"> 
                         <button style="font-size:15px" class="btn btn-info"><i class="fa fa-eye"></i></button>
                     </a> 
-                    <a  href="/trolleyes-client/public_html/usuario/edit/{{fila.id}}"> 
+                    <a  href="{{ob}}/edit/{{fila.id}}"> 
                         <button style="font-size:15px" class="btn btn-success"><i class="fa fa-edit"></i></button>
                     </a> 
-                    <a  href="/trolleyes-client/public_html/usuario/remove/{{fila.id}}"> 
+                    <a  href="{{ob}}/remove/{{fila.id}}"> 
                         <button style="font-size:15px" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
                     </a> 
                 </td>                                  

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var trolleyes = angular.module('MyApp', [
     'ngRoute',
@@ -9,7 +9,8 @@ var trolleyes = angular.module('MyApp', [
     'productoControllers',
     'tipoproductoControllers',
     'facturaControllers',
-    'lineaControllers'
+    'lineaControllers',
+    'ui.bootstrap'
 ]);
 
 

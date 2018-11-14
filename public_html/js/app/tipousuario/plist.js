@@ -1,47 +1,113 @@
-'use strict';
+'use strict'
 
-moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '$location', 'toolService',
-    function ($scope, $http, $location, toolService) {
-        $scope.ruta = $location.path();
-        $scope.numeroPagina = "1";
-        $scope.numeroRegistrosPagina = "10";
-        $scope.limpiar = function () {
-            $scope.numeroPagina = "";
-            $scope.numeroRegistrosPagina = "";
-            $scope.cssAlertSuccess = "";
-            $scope.ajaxMensajeTipousuario = "";
-            $scope.ajaxDatoTipousuario = "";
+moduleTipousuario.controller('tipousuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
+    function ($scope, $http, $location, toolService, $routeParams) {
+
+        $scope.ob = "tipousuario";
+        $scope.totalPages = 1;
+        $scope.select = ["5", "10", "25", "50", "500"];
+
+        if (!$routeParams.order) {
+            $scope.orderURLServidor = "";
+            $scope.orderURLCliente = "";
+        } else {
+            $scope.orderURLServidor = "&order=" + $routeParams.order;
+            $scope.orderURLCliente = $routeParams.order;
         }
 
+        if (!$routeParams.rpp) {
+            $scope.rpp = "10";
+        } else {
+            $scope.rpp = $routeParams.rpp;
+        }
+
+        if (!$routeParams.page) {
+            $scope.page = 1;
+        } else {
+            if ($routeParams.page >= 1) {
+                $scope.page = $routeParams.page;
+            } else {
+                $scope.page = 1;
+            }
+        }
+
+
+        $scope.resetOrder = function () {
+            $location.url($scope.ob + "/plist/" + $scope.rpp + "/1");
+            $scope.activar= "false";
+        };
+
+
+        $scope.ordena = function (order, align) {
+            if ($scope.orderURLServidor === "") {
+                $scope.orderURLServidor = "&order=" + order + "," + align;
+                $scope.orderURLCliente = order + "," + align;
+            } else {
+                $scope.orderURLServidor += "-" + order + "," + align;
+                $scope.orderURLCliente += "-" + order + "," + align;
+            };
+            $location.url( $scope.ob + "/plist/" + $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
+        };
+
+        //getcount
         $http({
-            method: "GET",
-            withCredential: true,
-            url: "http://localhost:8081/trolleyes/json?ob=tipousuario&op=getpage&rpp=" + $scope.numeroRegistrosPagina + "&page=" + $scope.numeroPagina
+            method: 'GET',
+            url: "http://localhost:8081/trolleyes/json?ob=" + $scope.ob + "&op=getcount"
         }).then(function (response) {
             $scope.status = response.status;
-            $scope.ajaxDatoTipousuario = response.data.message;
+            $scope.ajaxDataTipousuariosNumber = response.data.message;
+            $scope.totalPages = Math.ceil($scope.ajaxDataTipousuariosNumber / $scope.rpp);
+            if ($scope.page > $scope.totalPages) {
+                $scope.page = $scope.totalPages;
+                $scope.update();
+            }
+            pagination2();
         }, function (response) {
-            $scope.cssAlertSuccess = "alert alert-danger"
-            $scope.ajaxMensajeTipousuario = "Debes introducir al menos un número";
+            $scope.ajaxDataTipousuariosNumber = response.data.message || 'Request failed';
             $scope.status = response.status;
         });
 
-        $scope.mostrarDatos = function () {
-            $http({
-                method: "GET",
-                withCredential: true,
-                url: "http://localhost:8081/trolleyes/json?ob=tipousuario&op=getpage&rpp=" + $scope.numeroRegistrosPagina + "&page=" + $scope.numeroPagina
-            }).then(function (response) {
-                $scope.status = response.status;
-                $scope.ajaxDatoTipousuario = response.data.message;
-            }, function (response) {
-                $scope.cssAlertSuccess = "alert alert-danger"
-                $scope.ajaxMensajeTipousuario = "Debes introducir al menos un número";
-                $scope.status = response.status;
-            });
+        $http({
+            method: 'GET',
+            url: "http://localhost:8081/trolleyes/json?ob="+ $scope.ob +"&op=getpage&rpp=" + $scope.rpp + "&page=" + $scope.page + $scope.orderURLServidor
+        }).then(function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataTipousuarios = response.data.message;
+        }, function (response) {
+            $scope.status = response.status;
+            $scope.ajaxDataTipousuarios = response.data.message || 'Request failed';
+        });
+
+
+
+        $scope.update = function () {
+            $location.url($scope.ob + "/plist/" + $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
+        };
+
+        //paginacion neighbourhood
+        function pagination2() {
+            $scope.list2 = [];
+            $scope.neighborhood = 1;
+            for (var i = 1; i <= $scope.totalPages; i++) {
+                if (i === $scope.page) {
+                    $scope.list2.push(i);
+                } else if (i <= $scope.page && i >= ($scope.page - $scope.neighborhood)) {
+                    $scope.list2.push(i);
+                } else if (i >= $scope.page && i <= ($scope.page - -$scope.neighborhood)) {
+                    $scope.list2.push(i);
+                } else if (i === ($scope.page - $scope.neighborhood) - 1) {
+                    if ($scope.page >= 4) {
+                        $scope.list2.push("...");
+                    }
+                } else if (i === ($scope.page - -$scope.neighborhood) + 1) {
+                    if ($scope.page <= $scope.totalPages - 3) {
+                        $scope.list2.push("...");
+                    }
+                }
+            }
         }
 
         $scope.isActive = toolService.isActive;
-
     }
+
 ]);

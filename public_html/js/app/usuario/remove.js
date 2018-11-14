@@ -1,11 +1,12 @@
-'use strict';
+'use strict'
 
 moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {
+        $scope.ob = "usuario";
         $scope.id = $routeParams.id;
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=get&id=' + $scope.id
+            url: 'http://localhost:8081/trolleyes/json?ob='+$scope.ob+'&op=get&id=' + $scope.id
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDatoUsuario = response.data.message;
@@ -20,7 +21,7 @@ moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', '$locati
             if (accion === "eliminar") {
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=remove&id=' + $scope.id
+                    url: 'http://localhost:8081/trolleyes/json?ob='+$scope.ob+'&op=remove&id=' + $scope.id
                 }).then(function (response) {
                     $scope.mensaje = true;
                     $scope.mensaje2 = false;
@@ -40,5 +41,6 @@ moduleUsuario.controller('usuarioRemoveController', ['$scope', '$http', '$locati
             }
 
         };
+        $scope.isActive = toolService.isActive;
 
     }]);

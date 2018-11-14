@@ -1,11 +1,12 @@
 'use strict';
 
-moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService, $routeParams) {
-        $scope.idC = $routeParams.id;
+moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams', '$uibModal',
+    function ($scope, $http, $location, toolService, $routeParams, $uibModal) {
+        $scope.id = $routeParams.id;
+        $scope.ob = "usuario";
         $http({
             method: 'GET',
-            url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=get&id=' + $scope.idC
+            url: 'http://localhost:8081/trolleyes/json?ob=' + $scope.ob + '&op=get&id=' + $scope.id
         }).then(function (response) {
             $scope.status = response.status;
             $scope.ajaxDatoUsuario = response.data.message;
@@ -23,13 +24,15 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location
                 ape1: $scope.ajaxDatoUsuario.ape1,
                 ape2: $scope.ajaxDatoUsuario.ape2,
                 login: $scope.ajaxDatoUsuario.login,
-//                pass: $scope.ajaxDatoUsuario.pass,
+                pass: $scope.ajaxDatoUsuario.pass,
                 id_tipoUsuario: $scope.ajaxDatoUsuario.obj_tipoUsuario.id
-            };
+            }
             $http({
                 method: 'GET',
-                withCredentials: true,
-                url: 'http://localhost:8081/trolleyes/json?ob=usuario&op=update',
+                header: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                url: 'http://localhost:8081/trolleyes/json?ob=' + $scope.ob + '&op=update',
                 params: {json: JSON.stringify(json)}
             }).then(function (response) {
                 $scope.status = response.status;
@@ -39,5 +42,6 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location
                 $scope.status = response.status;
             });
         };
+        $scope.isActive = toolService.isActive;
 
     }]);
