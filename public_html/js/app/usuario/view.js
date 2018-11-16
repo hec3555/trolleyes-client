@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 moduleUsuario.controller('usuarioViewController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
     function ($scope, $http, $location, toolService, $routeParams) {

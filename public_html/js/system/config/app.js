@@ -9,8 +9,8 @@ var trolleyes = angular.module('MyApp', [
     'productoControllers',
     'tipoproductoControllers',
     'facturaControllers',
-    'lineaControllers',
-    'ui.bootstrap'
+    'lineaControllers'
+    
 ]);
 
 

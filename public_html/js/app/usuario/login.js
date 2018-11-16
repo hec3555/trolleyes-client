@@ -1,7 +1,7 @@
 'use strict';
 
-moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'toolService', '$routeParams',
-    function ($scope, $http, $location, toolService) {
+moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$location', 'toolService', '$routeParams','sessionService',
+    function ($scope, $http, $location, toolService, oSessionService) {
         
         $scope.ob = "usuario";
         
@@ -13,7 +13,8 @@ moduleUsuario.controller('usuarioLoginController', ['$scope', '$http', '$locatio
                 url: 'http://localhost:8081/trolleyes/json?ob='+$scope.ob+'&op=login&user='+$scope.nomUsu+'&pass='+$scope.pass
             }).then(function (response) {
                 $scope.status = response.status;
-                
+                oSessionService.setSessionActive;
+
                 $location.url("/");
             }, function (response) {
                 $scope.msgError= response.data.message || 'Request failed';

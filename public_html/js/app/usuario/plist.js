@@ -7,6 +7,7 @@ moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$locatio
             $scope.logged = true;
             $scope.username = oSessionService.getUserName();
         }
+//        $scope.username = oSessionService.getUserName();
         
         
         $scope.totalPages = 1;

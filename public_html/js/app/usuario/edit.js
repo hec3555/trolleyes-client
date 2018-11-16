@@ -1,7 +1,7 @@
 'use strict';
 
-moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams', '$uibModal',
-    function ($scope, $http, $location, toolService, $routeParams, $uibModal) {
+moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location', 'toolService', '$routeParams', 
+    function ($scope, $http, $location, toolService, $routeParams) {
         $scope.id = $routeParams.id;
         $scope.ob = "usuario";
         $http({
@@ -26,7 +26,7 @@ moduleUsuario.controller('usuarioEditController', ['$scope', '$http', '$location
                 login: $scope.ajaxDatoUsuario.login,
                 pass: $scope.ajaxDatoUsuario.pass,
                 id_tipoUsuario: $scope.ajaxDatoUsuario.obj_tipoUsuario.id
-            }
+            };
             $http({
                 method: 'GET',
                 header: {
