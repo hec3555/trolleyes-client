@@ -2,10 +2,10 @@
 
 moduleUsuario.controller('usuarioPlistController', ['$scope', '$http', '$location', 'toolService', '$routeParams','sessionService',
     function ($scope, $http, $location, toolService, $routeParams, oSessionService) {
-        
+        $scope.logged = false;
         if(oSessionService){
-            $scope.logged = true;
             $scope.username = oSessionService.getUserName();
+            $scope.logged = true;
         }
 //        $scope.username = oSessionService.getUserName();
         

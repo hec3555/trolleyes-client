@@ -5,6 +5,7 @@
 moduleService.service('sessionService', ['$location', function ($location) {
         var isSessionActive = false;
         var userName = "";
+        var userId = "";
         return {
             getUserName: function () {
                 return userName;
@@ -15,12 +16,18 @@ moduleService.service('sessionService', ['$location', function ($location) {
             isSessionActive: function () {
                 return isSessionActive;
             },
-            setSessionActive: function () {
+            setSessionActive: function (name) {
                 isSessionActive = true;
             },
-            setSessionInactive: function () {
+            setSessionInactive: function (name) {
                 isSessionActive = false;
+            },
+            getId: function () {
+                return userId;
+            },
+            setId: function (id) {
+                userId = id;
             }
-        }
+        };
 
     }]);
